@@ -1,7 +1,7 @@
 require 'json'
 
 module SendGrid
-  class Email
+  class SendGridEmail
     attr_accessor :email, :name
 
     # @param [String] email required e-mail address

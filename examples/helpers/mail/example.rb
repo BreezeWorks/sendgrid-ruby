@@ -3,9 +3,9 @@ include SendGrid
 require 'json'
 
 def hello_world
-  from = Email.new(email: 'test@example.com')
+  from = SendGridEmail.new(email: 'test@example.com')
   subject = 'Hello World from the Twilio SendGrid Ruby Library'
-  to = Email.new(email: 'test@example.com')
+  to = SendGridEmail.new(email: 'test@example.com')
   content = Content.new(type: 'text/plain', value: 'some text here')
   mail = SendGrid::Mail.new(from, subject, to, content)
   # puts JSON.pretty_generate(mail.to_json)
@@ -20,15 +20,15 @@ end
 
 def kitchen_sink
   mail = SendGrid::Mail.new
-  mail.from = Email.new(email: 'test@example.com')
+  mail.from = SendGridEmail.new(email: 'test@example.com')
   mail.subject = 'Hello World from the Twilio SendGrid Ruby Library'
   personalization = Personalization.new
-  personalization.add_to(Email.new(email: 'test1@example.com', name: 'Example User'))
-  personalization.add_to(Email.new(email: 'test2@example.com', name: 'Example User'))
-  personalization.add_cc(Email.new(email: 'test3@example.com', name: 'Example User'))
-  personalization.add_cc(Email.new(email: 'test4@example.com', name: 'Example User'))
-  personalization.add_bcc(Email.new(email: 'test5@example.com', name: 'Example User'))
-  personalization.add_bcc(Email.new(email: 'test6@example.com', name: 'Example User'))
+  personalization.add_to(SendGridEmail.new(email: 'test1@example.com', name: 'Example User'))
+  personalization.add_to(SendGridEmail.new(email: 'test2@example.com', name: 'Example User'))
+  personalization.add_cc(SendGridEmail.new(email: 'test3@example.com', name: 'Example User'))
+  personalization.add_cc(SendGridEmail.new(email: 'test4@example.com', name: 'Example User'))
+  personalization.add_bcc(SendGridEmail.new(email: 'test5@example.com', name: 'Example User'))
+  personalization.add_bcc(SendGridEmail.new(email: 'test6@example.com', name: 'Example User'))
   personalization.subject = 'Hello World from the Personalized Twilio SendGrid Ruby Library'
   personalization.add_header(Header.new(key: 'X-Test', value: 'True'))
   personalization.add_header(Header.new(key: 'X-Mock', value: 'False'))
@@ -40,12 +40,12 @@ def kitchen_sink
   mail.add_personalization(personalization)
 
   personalization2 = Personalization.new
-  personalization2.add_to(Email.new(email: 'test1@example.com', name: 'Example User'))
-  personalization2.add_to(Email.new(email: 'test2@example.com', name: 'Example User'))
-  personalization2.add_cc(Email.new(email: 'test3@example.com', name: 'Example User'))
-  personalization2.add_cc(Email.new(email: 'test4@example.com', name: 'Example User'))
-  personalization2.add_bcc(Email.new(email: 'test5@example.com', name: 'Example User'))
-  personalization2.add_bcc(Email.new(email: 'test6@example.com', name: 'Example User'))
+  personalization2.add_to(SendGridEmail.new(email: 'test1@example.com', name: 'Example User'))
+  personalization2.add_to(SendGridEmail.new(email: 'test2@example.com', name: 'Example User'))
+  personalization2.add_cc(SendGridEmail.new(email: 'test3@example.com', name: 'Example User'))
+  personalization2.add_cc(SendGridEmail.new(email: 'test4@example.com', name: 'Example User'))
+  personalization2.add_bcc(SendGridEmail.new(email: 'test5@example.com', name: 'Example User'))
+  personalization2.add_bcc(SendGridEmail.new(email: 'test6@example.com', name: 'Example User'))
   personalization2.subject = 'Hello World from the Personalized Twilio SendGrid Ruby Library'
   personalization2.add_header(Header.new(key: 'X-Test', value: 'True'))
   personalization2.add_header(Header.new(key: 'X-Mock', value: 'False'))
@@ -113,7 +113,7 @@ def kitchen_sink
   tracking_settings.ganalytics = Ganalytics.new(enable: true, utm_source: 'some source', utm_medium: 'some medium', utm_term: 'some term', utm_content: 'some content', utm_campaign: 'some campaign')
   mail.tracking_settings = tracking_settings
 
-  mail.reply_to = Email.new(email: 'test@example.com')
+  mail.reply_to = SendGridEmail.new(email: 'test@example.com')
 
   # puts JSON.pretty_generate(mail.to_json)
   puts mail.to_json
@@ -128,9 +128,9 @@ end
 def dynamic_template_data_hello_world
   mail = Mail.new
   mail.template_id = '' # a non-legacy template id
-  mail.from = Email.new(email: 'test@example.com')
+  mail.from = SendGridEmail.new(email: 'test@example.com')
   personalization = Personalization.new
-  personalization.add_to(Email.new(email: 'test1@example.com', name: 'Example User'))
+  personalization.add_to(SendGridEmail.new(email: 'test1@example.com', name: 'Example User'))
   personalization.add_dynamic_template_data(
     'variable' => [
       { 'foo' => 'bar' }, { 'foo' => 'baz' }
